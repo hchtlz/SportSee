@@ -64,14 +64,14 @@ interface LinkItem {
 }
 
 interface AsideProps {
-  links: LinkItem[];
+  aside_links: LinkItem[];
 }
 
-const Aside: React.FC<AsideProps> = ({ links }) => {
+const Aside: React.FC<AsideProps> = ({ aside_links }) => {
   return (
     <AsideContainer>
       <LinkContainer>
-        {links.map((link, index) => (
+        {aside_links.map((link, index) => (
           <SquareLink to={link.href} key={index}>
             <img src={link.logo} alt={link.alt} />
           </SquareLink>

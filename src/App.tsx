@@ -8,7 +8,7 @@ import bike from "./assets/bike.svg";
 import yoga from "./assets/yoga.svg";
 
 
-const links = [
+const aside_links = [
   {
     logo: yoga,
     href: "/",
@@ -35,7 +35,7 @@ export default function App() {
   return (
     <div className="App">
       <Header />
-      <Aside links={links} />
+      <Aside aside_links={aside_links} />
     </div>
   )
 }
