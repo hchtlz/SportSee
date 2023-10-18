@@ -8,26 +8,26 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   height: 9rem;
-  z-index: 2;
-  position: absolute;
+  position: static;
   width: 100%;
+  z-index: 2;
 `;
 
 const NavContainer = styled.nav`
-  margin-left: 2.8rem;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0 2.8rem 0 2.8rem;
   justify-content: space-between;
+  margin: 0 9rem 0 2.8rem;
   width: 100%;
 `;
 
 const NavLink = styled(Link)`
-  text-decoration: none;
   color: white;
   font-size: 2.4rem;
+  text-decoration: none;
   transition: color 0.2s ease-in-out;
+  z-index: 2;
 
   &:hover {
     color: #e50914;

@@ -9,3 +9,8 @@ body {
   margin: 0;
   height: 100vh;
 }
+
+main {
+  margin-left: 22.4rem;
+  margin-top: 6rem;
+}
