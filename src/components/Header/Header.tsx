@@ -8,6 +8,9 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   height: 9rem;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
 `;
 
 const NavContainer = styled.nav`
