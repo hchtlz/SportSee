@@ -11,6 +11,7 @@ body {
 }
 
 main {
-  margin-left: 22.4rem;
-  margin-top: 6rem;
+  margin-left: 15rem;
+  margin-top: 5rem;
+  margin-right: calc(19rem - 11.7rem);
 }
