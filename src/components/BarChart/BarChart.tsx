@@ -67,33 +67,50 @@ const TooltipText = (payload: Payload[]) => {
       <p>
         {payload[0].value} {payload[0].unit}
       </p>
-    )
+    );
   }
   if (payload && payload.length) {
-    return payload.map((prop: Payload, id: number) => {
-      return prop.dataKey === 'calories' ? (
-        <li key={`calories-${id}`}>{prop.value}kCal</li>
-      ) : (
-        <li key={`calories-${id}`}>{prop.value}Kg</li>
-      )
-    })
+    return (
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
+        {payload.map((prop: Payload, id: number) => (
+          <li key={`calories-${id}`}>{prop.dataKey === 'calories' ? `${prop.value}kCal` : `${prop.value}Kg`}</li>
+        ))}
+      </ul>
+    );
   }
 
-  return ''
-}
+  return '';
+};
 
 const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length > 0) {
     return (
       <div className="custom-tooltip">
-        <ul>{TooltipText(payload as Payload[])}</ul>
+        {TooltipText(payload as Payload[])}
       </div>
     );
   }
 
   return null;
+};
+
+interface AxisTickProps {
+  payload: {
+    value: string;
+  };
+  x: number;
+  y: number;
 }
 
+const CustomizedAxisTick = ({payload, x, y}: AxisTickProps) => {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={0} dy={25} fill="#999" fontSize={14} textAnchor="middle" >
+        {Number(payload.value.slice(8))}
+      </text>
+    </g>
+  )
+}
 
 const UserBarChart = () => {
   const { userId = "" } = useParams<{ userId?: string }>();
@@ -126,9 +143,9 @@ const UserBarChart = () => {
         </Legend>
       </Head>
       <ResponsiveContainer height={200}>
-        <BarChart data={userActivityData} barGap={8} barCategoryGap={1}>
+        <BarChart data={userActivityData} barGap={8} barCategoryGap={1} margin={{ left: 0, right: 0 }}>
           <CartesianGrid vertical={false} strokeDasharray="1 1" />
-          <XAxis dataKey="day" tickLine={false} tick={{ fontSize: 14 }} dy={15} stroke="1 1" />
+          <XAxis dataKey="day" tickLine={false} tick={CustomizedAxisTick} axisLine={{ stroke: '#DEDEDE' }} />
           <YAxis
             yAxisId="kilogram"
             dataKey="kilogram"
@@ -157,7 +174,7 @@ const UserBarChart = () => {
               alignItems: 'center',
               textAlign: 'center',
               lineHeight: '2.2rem',
-              fontSize: '0.7rem'
+              fontSize: '1rem'
             }}
           />
           <Bar yAxisId="kilogram" dataKey="kilogram" fill="#282D30" barSize={7} radius={[50, 50, 0, 0]} />
