@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import userMainData from "../../service/mocked_data/userMainData";
 import styled from "styled-components";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import userMainData from "../../service/mocked_data/userMainData";
 import Heading from "../../components/Heading/Heading";
