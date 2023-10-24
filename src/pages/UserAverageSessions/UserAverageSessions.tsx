@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import userAverageSessions from "../../service/mocked_data/userAverageSessions";
+import { userAverageSessions } from "../../service/mocked_data/mockedData";
+
 
 export default function UserAverageSessions() {
   const { userId } = useParams();

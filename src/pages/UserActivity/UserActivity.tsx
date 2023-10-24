@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import userActivity from "../../service/mocked_data/userActivity";
-import userMainData from "../../service/mocked_data/userMainData";
+import { userActivity, userMainData } from "../../service/mocked_data/mockedData";
 
 export default function UserActivity() {
   const { userId } = useParams();

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import userMainData from "../../service/mocked_data/userMainData";
+import { userMainData } from "../../service/mocked_data/mockedData";
 import styled from "styled-components";
 
 const HomeContainer = styled.div`
