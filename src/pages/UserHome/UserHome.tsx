@@ -1,11 +1,20 @@
 import React from "react";
-
-
-// TODO 👉 : Implémenter le composant pour retourner le nom des différents utilisateurs et modifier les routes pour que le composant s'affiche sur la route /id/:userId
+import { useParams } from "react-router-dom";
+import userMainData from "../../service/mocked_data/userMainData";
+import Heading from "../../components/Heading/Heading";
 
 export default function UserHome() {
+  const { userId } = useParams();
+
+  const user = userMainData.find((userData) => userData.id.toString() === userId);
+
   return (
     <div>
+      {user ? (
+        <Heading name={`${user.userInfos.firstName}`} />
+      ) : (
+        <p>Utilisateur non trouvé</p>
+      )}
     </div>
   );
 }
