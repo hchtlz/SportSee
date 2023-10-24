@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { userMainData } from "../../service/mocked_data/mockedData";
 import Heading from "../../components/Heading/Heading";
+import BarChart from "../../components/BarChart/BarChart"; 
 
 export default function UserHome() {
   const { userId } = useParams();
@@ -46,6 +47,7 @@ export default function UserHome() {
       ) : (
         <p>Utilisateur non trouvé</p>
       )}
+      <BarChart />
     </div>
   );
 }
