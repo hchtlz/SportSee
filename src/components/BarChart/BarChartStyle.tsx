@@ -1,45 +1,42 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    margin-bottom: 2em;
-	height: 320px;
-    width: 835px;
-	border-radius: 5px;
-    background: #FBFBFB;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
-	padding: 25px;
-	
-	@media (max-width: 1025px) {
-      padding-left:0;
-    }
+	border-radius: 0.5rem;
+	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.0212249);
+	height: 32rem;
+	padding: 2.5rem;
+  background: #FBFBFB;
+  margin-bottom: 2em;
+  width: 83.5rem;
 `
+
 const Head = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2.5rem;
-    margin-right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-right: 1.5rem;
 	`
 
 const Title= styled.h2`
-    font-size: 15px;
-    line-height: 24px;
-    color: #20253A;
+  color: #20253A;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
 `
 
 const Text = styled.p`
-	font-weight: 500;
-	font-size: 14px;
 	color: #74798c;
-	margin-left: 10px;
+	font-size: 1.4rem;
+	font-weight: 500;
+	margin-left: 1rem;
 `
 
 const Icon = styled.div`
-	height: 8px;
-	width: 8px;
-	border-radius: 50%;
-	background-color: ${(props) => props.color};
 	align-self: center;
-	margin-left: 30px;
+  background-color: ${(props) => props.color};
+	border-radius: 50%;
+	height: 0.8rem;
+	margin-left: 3rem;
+	width: 0.8rem
 `
 
 const Legend = styled.div`
@@ -47,8 +44,8 @@ const Legend = styled.div`
 `
 
 const Info = styled.div`
-    display: flex;
-    align-items:center;
+  align-items:center;
+  display: flex;
 `
 
 export { Wrapper, Head, Title, Text, Icon, Legend, Info };

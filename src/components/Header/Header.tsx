@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
   background-color: black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.4rem 0.4rem;
   display: flex;
   flex-direction: row;
   height: 9rem;
@@ -45,9 +46,9 @@ export default function Header() {
           <LogoImage src={logo} alt="logo" />
         </NavLink>
         <NavLink to="/" className="header__link">Accueil</NavLink>
-        <NavLink to="/profil" className="header__link">Profil</NavLink>
-        <NavLink to="/setting" className="header__link">Réglage</NavLink>
-        <NavLink to="/community" className="header__link">Communauté</NavLink>
+        <NavLink to="/" className="header__link">Profil</NavLink>
+        <NavLink to="/" className="header__link">Réglage</NavLink>
+        <NavLink to="/" className="header__link">Communauté</NavLink>
       </NavContainer>
     </HeaderContainer>
   );

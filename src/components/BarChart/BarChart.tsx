@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getUserActivity } from '../../service/api/data';
 import { Wrapper, Head, Title, Legend, Info, Icon, Text } from './BarChartStyle';
 
+/* Fonction qui génère le contenu de la tooltip en fonction des données reçues */
 interface Payload {
   value: number;
   unit?: string;
@@ -31,6 +32,7 @@ const TooltipText = (payload: Payload[]) => {
   return '';
 };
 
+/* Composant personnalisé de la tooltip */
 const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length > 0) {
     return (
@@ -43,6 +45,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   return null;
 };
 
+/* Composant personnalisé pour les étiquettes de l'axe X */
 interface AxisTickProps {
   payload: {
     value: string;
@@ -54,7 +57,7 @@ interface AxisTickProps {
 const CustomizedAxisTick = ({payload, x, y}: AxisTickProps) => {
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={25} fill="#999" fontSize={14} textAnchor="middle" >
+      <text x={0} y={0} dy={25} fill="#999" fontSize={14} textAnchor="middle">
         {Number(payload.value.slice(8))}
       </text>
     </g>
@@ -66,6 +69,7 @@ const UserBarChart = () => {
   const [userActivityData, setUserActivityData] = useState([]);
 
   useEffect(() => {
+    /* Récupère les données d'activité de l'utilisateur */
     getUserActivity(userId)
       .then((data) => {
         const sessions = data.data.sessions;
@@ -94,7 +98,15 @@ const UserBarChart = () => {
       <ResponsiveContainer height={200}>
         <BarChart data={userActivityData} barGap={8} barCategoryGap={1}>
           <CartesianGrid vertical={false} strokeDasharray="1 1" />
-          <XAxis dataKey="day" tickLine={false} tick={CustomizedAxisTick} axisLine={{ stroke: '#DEDEDE' }} />
+          <XAxis 
+            dataKey="day" 
+            tickLine={false} 
+            tick={CustomizedAxisTick} 
+            axisLine={{ stroke: '#DEDEDE' }}
+            /* scale='point' */
+            /* padding={{ left: 10 }} */
+            /* interval={0}  */
+          />
           <YAxis
             yAxisId="kilogram"
             dataKey="kilogram"

@@ -11,7 +11,5 @@ body {
 }
 
 main {
-  margin-left: 15rem;
-  margin-top: 5rem;
-  margin-right: calc(19rem - 11.7rem);
+  margin-left: 1rem;
 }
