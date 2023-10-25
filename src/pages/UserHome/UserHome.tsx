@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { userMainData } from '../../service/mocked_data/mockedData';
 import Heading from '../../components/Heading/Heading';
 import BarChart from '../../components/BarChart/BarChart';
+import RadialBar from '../../components/RadialBar/RadialBar';
 import InfoCard from '../../components/InfoCard/InfoCard';
 import styled from 'styled-components';
 import calories from "../../assets/calories.svg";
@@ -47,12 +48,6 @@ const RandomDiv3 = styled.div`
   width: 100%;
 `;
 
-const RandomDiv4 = styled.div`
-  background: gostwhite;
-  height: 10rem;
-  width: 100%;
-`;
-
 const StyledBarChart = styled(BarChart)`
   width: 100%;
 `;
@@ -60,9 +55,10 @@ const StyledBarChart = styled(BarChart)`
 const ChartAsides = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
   margin-left: 2rem;
   width: 100%;
-  flex: 1;
 `;
 
 const UserInfoCard = styled(InfoCard)`
@@ -86,7 +82,7 @@ export default function UserHome() {
           <ChartsMainContainerBase>
             <RandomDiv2>Div 2</RandomDiv2>
             <RandomDiv3>Div 3</RandomDiv3>
-            <RandomDiv4>Div 4</RandomDiv4>
+            <RadialBar />
           </ChartsMainContainerBase>
         </ChartsMainContainer>
         <ChartAsides>
