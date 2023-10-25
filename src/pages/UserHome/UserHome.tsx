@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { userMainData } from '../../service/mocked_data/mockedData';
+import { getUserInfos } from '../../service/api/data';
 import Heading from '../../components/Heading/Heading';
 import BarChart from '../../components/BarChart/BarChart';
-import RadialBar from '../../components/RadialBar/RadialBar';
 import InfoCard from '../../components/InfoCard/InfoCard';
 import styled from 'styled-components';
 import calories from "../../assets/calories.svg";
@@ -69,9 +69,39 @@ const UserInfoCard = styled(InfoCard)`
   background: purple;
 `;
 
+type UserData = {
+  id: number;
+  userInfos: {
+    firstName: string;
+    lastName: string;
+    age: number;
+  };
+  score: number;
+  keyData: {
+    calorieCount: number;
+    proteinCount: number;
+    carbohydrateCount: number;
+    lipidCount: number;
+  };
+};
+
+/* PROBLEME, J'AI ESSAYE DE REMPLACER LES DATAS LOCALES PAR L'API MAIS RIEN NE FONCTIONNE, USER EST NIL, A CORRIGER */
+
 export default function UserHome() {
   const { userId } = useParams();
-  const user = userMainData.find((userData) => userData.id.toString() === userId);
+  const [user, setUser] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    if (userId) {
+      getUserInfos(userId)
+        .then((userData) => {
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [userId]);
 
   return (
     <Wrapper>
@@ -82,7 +112,7 @@ export default function UserHome() {
           <ChartsMainContainerBase>
             <RandomDiv2>Div 2</RandomDiv2>
             <RandomDiv3>Div 3</RandomDiv3>
-            <RadialBar />
+            {/* <RadialBar /> */}
           </ChartsMainContainerBase>
         </ChartsMainContainer>
         <ChartAsides>
