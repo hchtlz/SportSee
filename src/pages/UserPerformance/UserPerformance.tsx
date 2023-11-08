@@ -1,33 +1,26 @@
 import { useParams } from "react-router-dom";
-import { userPerformance } from "../../service/mocked_data/mockedData";
 import { getUserPerformance } from "../../service/api/data";
+import { useEffect, useState } from "react";
 
 export default function UserPerformance() {
-  const { userId } = useParams();
-  const userData = userPerformance.find((data) => data.userId.toString() === userId);
+  const { userId } = useParams<{ userId: string }>();
+  const [userData, setUserData] = useState(null);
 
-  if (!userData) {
-    return <div>Utilisateur non trouvé.</div>;
-  }
-
-  const performanceData = userData.data;
-  
-  
-  /* TEST : Afficher dans la console les datas en utilisant Axios et l'API */
-  if (userId) {
-    getUserPerformance(userId)
+  useEffect(() => {
+    getUserPerformance(userId || "")
       .then((data) => {
         console.log(data);
+        setUserData(data);
+
       })
       .catch((error) => {
         console.error("Une erreur s'est produite : ", error);
       });
-  }
+  }, [userId]);
 
   return (
     <div>
-      <pre>{JSON.stringify(performanceData, null, 2)}</pre>
+      <pre>{JSON.stringify(userData, null, 2)}</pre>
     </div>
   );
 }
-

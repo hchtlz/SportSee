@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { userMainData } from '../../service/mocked_data/mockedData';
 import { getUserInfos } from '../../service/api/data';
 import Heading from '../../components/Heading/Heading';
 import BarChart from '../../components/BarChart/BarChart';
 import InfoCard from '../../components/InfoCard/InfoCard';
+import RadialBar from '../../components/RadialBar/RadialBar';
 import styled from 'styled-components';
 import calories from "../../assets/calories.svg";
 import fat from "../../assets/fat.svg";
 import protein from "../../assets/protein.svg";
 import carbs from "../../assets/carbs.svg";
+import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   border-radius: 0.5rem;
@@ -76,7 +76,8 @@ type UserData = {
     lastName: string;
     age: number;
   };
-  score: number;
+  score?: number;
+  todayScore?: number;
   keyData: {
     calorieCount: number;
     proteinCount: number;
@@ -85,10 +86,9 @@ type UserData = {
   };
 };
 
-/* PROBLEME, J'AI ESSAYE DE REMPLACER LES DATAS LOCALES PAR L'API MAIS RIEN NE FONCTIONNE, USER EST NIL, A CORRIGER */
-
 export default function UserHome() {
   const { userId } = useParams();
+  console.log(userId)
   const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
@@ -96,6 +96,7 @@ export default function UserHome() {
       getUserInfos(userId)
         .then((userData) => {
           setUser(userData);
+          console.log(userData);
         })
         .catch((error) => {
           console.error(error);
@@ -103,16 +104,18 @@ export default function UserHome() {
     }
   }, [userId]);
 
+  const score = user?.score ? user.score : (user?.todayScore ? user?.todayScore : "");
+
   return (
     <Wrapper>
-      {user && <Heading name={`${user.userInfos.firstName}`} />}
+      {user && <Heading name={`${user.userInfos?.firstName}`} />}
       <ChartsWrapper>
         <ChartsMainContainer>
           {user && <StyledBarChart />}
           <ChartsMainContainerBase>
             <RandomDiv2>Div 2</RandomDiv2>
             <RandomDiv3>Div 3</RandomDiv3>
-            {/* <RadialBar /> */}
+            <RadialBar />
           </ChartsMainContainerBase>
         </ChartsMainContainer>
         <ChartAsides>
@@ -139,6 +142,12 @@ export default function UserHome() {
               <UserInfoCard
                 icon={fat}
                 value={user.keyData.lipidCount.toString()}
+                label="Lipides"
+                measurement="g"
+              />
+              <UserInfoCard
+                icon={fat}
+                value={score.toString()}
                 label="Lipides"
                 measurement="g"
               />

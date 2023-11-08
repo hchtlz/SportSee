@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getUserInfos = async (id: string) => {
   try {
     const res = await axios.get(`http://localhost:3000/user/${id}`);
-    return res.data;
+    return res.data.data;
   } catch (error) {
     return Promise.reject(`Erreur lors de la récupération des informations de l'utilisateur : ${(error as Error).message}`);
   }

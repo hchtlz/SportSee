@@ -1,23 +1,26 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { userActivity, userMainData } from "../../service/mocked_data/mockedData";
+import { getUserActivity } from "../../service/api/data";
 
 export default function UserActivity() {
-  const { userId } = useParams();
+  const { userId } = useParams<{ userId: string }>();
+  const [userData, setUserData] = useState(null);
 
-  const userData = userActivity.find((data) => data.userId.toString() === userId);
+  useEffect(() => {
+    getUserActivity(userId || "")
+      .then((data) => {
+        console.log(data);
+        setUserData(data);
 
-  if (!userData) {
-    return <div>Utilisateur non trouvé.</div>;
-  }
-
-  const activitySessions = userData.sessions;
-
-  const user = userMainData.find((user) => user.id.toString() === userId);
+      })
+      .catch((error) => {
+        console.error("Une erreur s'est produite : ", error);
+      });
+  }, [userId]);
 
   return (
     <div>
-      <pre>{JSON.stringify(activitySessions, null, 2)}</pre>
-      <pre>{JSON.stringify(user ? user.keyData : "N/A", null, 2)}</pre>
+      <pre>{JSON.stringify(userData, null, 2)}</pre>
     </div>
   );
 }
