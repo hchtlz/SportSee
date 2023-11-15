@@ -21,7 +21,7 @@ const LineChartTitle = styled.h2`
 const CustomLineChartContainer = styled.div`
   background-color: #ff0000;
   border-radius: 0.5rem;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   position: relative;
 `;
 
@@ -33,6 +33,15 @@ const CustomLineChart = styled(LineChart)`
     margin-top: 13rem;
     opacity: 0.5;
   }
+`;
+
+const CustomTooltipContent = styled.div`
+  background-color: white;
+  color: black;
+  font-weight: 500;
+  padding: 0.2rem 0.7rem;
+  position: relative;
+  text-align: center;
 `;
 
 const LineChartComponent = () => {
@@ -51,13 +60,27 @@ const LineChartComponent = () => {
 
   const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
-  console.log(data);
-  console.log(userId);
+  type CustomTooltipProps = {
+    active: boolean;
+    payload?: { value: number }[];
+  };
+
+  const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
+    if (active && payload && payload.length) {
+      return (
+        <CustomTooltipContent>
+          <p>{`${payload[0].value} min`}</p>
+        </CustomTooltipContent>
+      );
+    }
+  
+    return null;
+  };
 
   return (
     <CustomLineChartContainer>
       <LineChartTitle>Durée moyenne des sessions</LineChartTitle>
-      <CustomLineChart width={258} height={263} data={data} >
+      <CustomLineChart width={258} height={263} data={data}>
         <XAxis         
           dataKey="day"
           axisLine={false}
@@ -70,7 +93,7 @@ const LineChartComponent = () => {
           domain={[0, 100]}
           tickCount={5}
         />
-        <Tooltip />
+        <Tooltip content={<CustomTooltip active={false} />} />
         <Line
           type="monotone"
           dataKey="sessionLength"
