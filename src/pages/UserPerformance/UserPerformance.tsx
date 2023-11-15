@@ -9,7 +9,6 @@ export default function UserPerformance() {
   useEffect(() => {
     getUserPerformance(userId || "")
       .then((data) => {
-        console.log(data);
         setUserData(data);
 
       })

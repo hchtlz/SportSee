@@ -3,7 +3,9 @@ import { getUserInfos } from '../../service/api/data';
 import Heading from '../../components/Heading/Heading';
 import BarChart from '../../components/BarChart/BarChart';
 import InfoCard from '../../components/InfoCard/InfoCard';
+import LineChart from '../../components/LineChart/LineChart';
 import RadialBar from '../../components/RadialBar/RadialBar';
+import RadarChart from '../../components/RadarChart/RadarChart';
 import styled from 'styled-components';
 import calories from "../../assets/calories.svg";
 import fat from "../../assets/fat.svg";
@@ -33,12 +35,6 @@ const ChartsMainContainerBase = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-`;
-
-const RandomDiv2 = styled.div`
-  background: snow;
-  height: 10rem;
   width: 100%;
 `;
 
@@ -88,7 +84,6 @@ type UserData = {
 
 export default function UserHome() {
   const { userId } = useParams();
-  console.log(userId)
   const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
@@ -96,7 +91,6 @@ export default function UserHome() {
       getUserInfos(userId)
         .then((userData) => {
           setUser(userData);
-          console.log(userData);
         })
         .catch((error) => {
           console.error(error);
@@ -113,8 +107,8 @@ export default function UserHome() {
         <ChartsMainContainer>
           {user && <StyledBarChart />}
           <ChartsMainContainerBase>
-            <RandomDiv2>Div 2</RandomDiv2>
-            <RandomDiv3>Div 3</RandomDiv3>
+            <LineChart />
+            <RadarChart />
             <RadialBar />
           </ChartsMainContainerBase>
         </ChartsMainContainer>

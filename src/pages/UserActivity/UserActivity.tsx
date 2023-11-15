@@ -9,7 +9,6 @@ export default function UserActivity() {
   useEffect(() => {
     getUserActivity(userId || "")
       .then((data) => {
-        console.log(data);
         setUserData(data);
 
       })

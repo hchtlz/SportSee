@@ -9,7 +9,6 @@ export default function UserAverageSessions() {
   useEffect(() => {
     getUserAverageSessions(userId || "")
       .then((data) => {
-        console.log(data);
         setUserData(data);
 
       })
