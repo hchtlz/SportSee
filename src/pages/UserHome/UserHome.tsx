@@ -38,12 +38,6 @@ const ChartsMainContainerBase = styled.div`
   width: 100%;
 `;
 
-const RandomDiv3 = styled.div`
-  background: mintcream;
-  height: 10rem;
-  width: 100%;
-`;
-
 const StyledBarChart = styled(BarChart)`
   width: 100%;
 `;
@@ -109,7 +103,7 @@ export default function UserHome() {
           <ChartsMainContainerBase>
             <LineChart />
             <RadarChart />
-            <RadialBar />
+            <RadialBar score={Number(score)} />
           </ChartsMainContainerBase>
         </ChartsMainContainer>
         <ChartAsides>
@@ -136,12 +130,6 @@ export default function UserHome() {
               <UserInfoCard
                 icon={fat}
                 value={user.keyData.lipidCount.toString()}
-                label="Lipides"
-                measurement="g"
-              />
-              <UserInfoCard
-                icon={fat}
-                value={score.toString()}
                 label="Lipides"
                 measurement="g"
               />

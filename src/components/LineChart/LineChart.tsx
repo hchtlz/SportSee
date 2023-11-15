@@ -21,7 +21,7 @@ const LineChartTitle = styled.h2`
 const CustomLineChartContainer = styled.div`
   background-color: #ff0000;
   border-radius: 0.5rem;
-  padding: 1.5rem 0;
+  padding: 1.5rem;
   position: relative;
 `;
 
