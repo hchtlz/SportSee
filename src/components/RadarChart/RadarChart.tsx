@@ -5,9 +5,13 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 import styled from 'styled-components';
 
 const RadarChartContainer = styled.div`
-  background-color: black;
+  background-color: #282D30;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+
+  & > .recharts-wrapper {
+    position: relative;
+    top: 0.9rem;
+  }
 `;
 
 const RadarChartComponent = () => {

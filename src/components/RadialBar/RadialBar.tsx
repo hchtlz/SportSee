@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RadialBarChart, RadialBar } from 'recharts';
 import { getUserInfos } from '../../service/api/data';
@@ -11,18 +11,21 @@ type RadialBarComponentProps = {
 const RadialBarContainer = styled.div`
   background-color: #FBFBFB;
   border-radius: 0.5rem;
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 const ScoreTitle = styled.h3`
-  color: white;
+  color: black;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
 `;
 
 const ScorePercentage = styled.p`
@@ -40,6 +43,22 @@ const GoalDescription = styled.p`
   text-align: center;
 `;
 
+const InfoText = styled.div`
+  align-items: center;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 16.2rem;
+  justify-content: center;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 16.2rem;
+  z-index: 0;
+`;
+
 const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
   const [data, setData] = useState<{ uv: number; name?: string }[]>([{ uv: score, name: 'Score' }]);
   const { userId } = useParams<{ userId?: string }>();
@@ -47,7 +66,7 @@ const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
   useEffect(() => {
     if (userId) {
       getUserInfos(userId)
-        .then((res) => setData([{ name: 'Score', uv: score }]))
+        .then(() => setData([{ name: 'Score', uv: score }]))
         .catch((error) => {
           console.error(error);
         });
@@ -57,11 +76,17 @@ const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
   return (
     <RadialBarContainer>
       <ScoreTitle>Score</ScoreTitle>
-      <RadialBarChart width={258} height={263} cx={130} cy={130} innerRadius={800} outerRadius={60} barSize={10} data={data}>
-        <RadialBar fill="#ff0000" background dataKey="uv" />
+      <RadialBarChart width={258} height={263} cx="50%" cy="50%" innerRadius="70%"  barSize={15} data={data} startAngle={90} endAngle={450}>
+        <RadialBar 
+        fill="#ff0000"
+        background
+        dataKey="uv"
+      />
       </RadialBarChart>
-      <ScorePercentage>{(score * 100).toFixed(0)}%</ScorePercentage>
-      <GoalDescription>de votre objectif</GoalDescription>
+      <InfoText>
+        <ScorePercentage>{(score * 100).toFixed(0)}%</ScorePercentage>
+        <GoalDescription>de votre objectif</GoalDescription>
+      </InfoText>
     </RadialBarContainer>
   );
 };

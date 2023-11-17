@@ -10,7 +10,6 @@ const LineChartTitle = styled.h2`
   font-weight: 700;
   left: 3.4rem;
   line-height: 1.3;
-  margin-bottom: 1.5rem;
   margin: 0;
   max-width: 14.7rem;
   padding: 0;
@@ -21,7 +20,6 @@ const LineChartTitle = styled.h2`
 const CustomLineChartContainer = styled.div`
   background-color: #ff0000;
   border-radius: 0.5rem;
-  padding: 1.5rem;
   position: relative;
 `;
 
@@ -38,10 +36,11 @@ const CustomLineChart = styled(LineChart)`
 const CustomTooltipContent = styled.div`
   background-color: white;
   color: black;
-  font-weight: 500;
-  padding: 0.2rem 0.7rem;
+  font-weight: bold;
+  font-size: 1rem;
   position: relative;
   text-align: center;
+  padding: 0.2rem 1rem;
 `;
 
 const LineChartComponent = () => {
@@ -80,20 +79,19 @@ const LineChartComponent = () => {
   return (
     <CustomLineChartContainer>
       <LineChartTitle>Durée moyenne des sessions</LineChartTitle>
-      <CustomLineChart width={258} height={263} data={data}>
+      <CustomLineChart width={258} height={263} data={data} >
         <XAxis         
           dataKey="day"
           axisLine={false}
           tickFormatter={(value) => daysOfWeek[value - 1]} 
           tickLine={false}
-          tickMargin={20}
         />
         <YAxis 
           hide={true}
           domain={[0, 100]}
           tickCount={5}
         />
-        <Tooltip content={<CustomTooltip active={false} />} />
+        <Tooltip content={<CustomTooltip active={false} />} cursor={{ stroke: 'black', strokeWidth: 80, strokeOpacity: 0.2 }} /> 
         <Line
           type="monotone"
           dataKey="sessionLength"
