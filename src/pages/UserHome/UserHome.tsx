@@ -101,7 +101,7 @@ export default function UserHome() {
         <ChartsMainContainer>
           {user && <StyledBarChart />}
           <ChartsMainContainerBase>
-            <LineChart />
+            {user &&<LineChart /> }
             <RadarChart />
             <RadialBar score={Number(score)} />
           </ChartsMainContainerBase>
