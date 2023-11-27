@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { getUserPerformance } from "../../service/api/data";
 import { useEffect, useState } from "react";
+import NotFound from "../404/404";
 
 export default function UserPerformance() {
   const { userId } = useParams<{ userId: string }>();
@@ -10,12 +11,15 @@ export default function UserPerformance() {
     getUserPerformance(userId || "")
       .then((data) => {
         setUserData(data);
-
       })
       .catch((error) => {
         console.error("Une erreur s'est produite : ", error);
       });
   }, [userId]);
+
+  if (!userData) {
+    return <NotFound />;
+  }
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { getUserAverageSessions } from "../../service/api/data";
 import { useEffect, useState } from "react";
+import NotFound from "../404/404";
 
 export default function UserAverageSessions() {
   const { userId } = useParams<{ userId: string }>();
@@ -16,6 +17,10 @@ export default function UserAverageSessions() {
         console.error("Une erreur s'est produite : ", error);
       });
   }, [userId]);
+
+  if (!userData) {
+    return <NotFound />;
+  }
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Aside from "./components/Aside/Aside";
+import NotFound from "./pages/404/404";
 import Home from "./pages/Home/Home";
 import UserHome from "./pages/UserHome/UserHome"
 import UserActivity from "./pages/UserActivity/UserActivity";
@@ -27,13 +28,10 @@ export default function App() {
   )
 }
 
-// TODO : Corriger et générer les pages 404
-
-function NotFound() {
-  return (
-    <div>
-      <h2>Page non trouvée</h2>
-      <p>Désolé, la page que vous cherchez n'existe pas.</p>
-    </div>
-  );
-}
+/*  
+  TODO :
+      Corriger et générer les pages 404
+      Afficher un message quand l'API n'est pas disponible
+      Corriger CSS des charts
+      Changer la source des données (les données mockées et les données de l’API) en changeant uniquement le service utilisant l’API et la classe de modélisation. 
+*/

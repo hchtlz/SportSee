@@ -6,6 +6,7 @@ import InfoCard from '../../components/InfoCard/InfoCard';
 import LineChart from '../../components/LineChart/LineChart';
 import RadialBar from '../../components/RadialBar/RadialBar';
 import RadarChart from '../../components/RadarChart/RadarChart';
+import NotFound from "../404/404";
 import styled from 'styled-components';
 import calories from "../../assets/calories.svg";
 import fat from "../../assets/fat.svg";
@@ -79,6 +80,7 @@ type UserData = {
 export default function UserHome() {
   const { userId } = useParams();
   const [user, setUser] = useState<UserData | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     if (userId) {
@@ -88,11 +90,16 @@ export default function UserHome() {
         })
         .catch((error) => {
           console.error(error);
+          setError(true);
         });
     }
   }, [userId]);
 
   const score = user?.score ? user.score : (user?.todayScore ? user?.todayScore : "");
+
+  if (error) {
+    return <NotFound />;
+  }
 
   return (
     <Wrapper>
@@ -101,9 +108,9 @@ export default function UserHome() {
         <ChartsMainContainer>
           {user && <StyledBarChart />}
           <ChartsMainContainerBase>
-            {user &&<LineChart /> }
-            <RadarChart />
-            <RadialBar score={Number(score)} />
+            {user && <LineChart />}
+            {user && <RadarChart />}
+            {user && <RadialBar score={Number(score)} />}
           </ChartsMainContainerBase>
         </ChartsMainContainer>
         <ChartAsides>
@@ -122,11 +129,11 @@ export default function UserHome() {
                 measurement="g"
               />
               <UserInfoCard
-                icon={carbs}  
+                icon={carbs}
                 value={user.keyData.carbohydrateCount.toString()}
                 label="Glucides"
                 measurement="g"
-                />
+              />
               <UserInfoCard
                 icon={fat}
                 value={user.keyData.lipidCount.toString()}
