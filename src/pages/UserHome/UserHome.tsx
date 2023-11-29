@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getUserInfos } from '../../service/api/data';
+import { getUserInfos } from '../../service/index';
 import Heading from '../../components/Heading/Heading';
 import BarChart from '../../components/BarChart/BarChart';
 import InfoCard from '../../components/InfoCard/InfoCard';
@@ -13,18 +13,30 @@ import fat from "../../assets/fat.svg";
 import protein from "../../assets/protein.svg";
 import carbs from "../../assets/carbs.svg";
 import { useEffect, useState } from 'react';
+import { UserInfo } from "../../service/types";
 
 const Wrapper = styled.div`
   border-radius: 0.5rem;
   height: 100%;
-  margin-left: 23.4rem;
+  margin-left: clamp(0.5rem, 12.5vw, 23.4rem);
   margin-top: 6.8rem;
   max-width: 113rem;
+
+  @media (max-width: 1500px) {
+    margin-left: 0;
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
 
 const ChartsWrapper = styled.div`
   margin-top: 7rem;
   display: flex;
+  
+  
+  @media (max-width: 1500px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const ChartsMainContainer = styled.div`
@@ -37,6 +49,13 @@ const ChartsMainContainerBase = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 1500px) {
+    flex-direction: column;
+    width: 26.3rem;
+    gap: 2rem;
+    margin: 0 auto;
+  }
 `;
 
 const StyledBarChart = styled(BarChart)`
@@ -50,6 +69,10 @@ const ChartAsides = styled.div`
   justify-content: space-between;
   margin-left: 2rem;
   width: 100%;
+
+  @media (max-width: 1500px) {
+    margin-left: 0;
+  }
 `;
 
 const UserInfoCard = styled(InfoCard)`
@@ -60,45 +83,29 @@ const UserInfoCard = styled(InfoCard)`
   background: purple;
 `;
 
-type UserData = {
-  id: number;
-  userInfos: {
-    firstName: string;
-    lastName: string;
-    age: number;
-  };
-  score?: number;
-  todayScore?: number;
-  keyData: {
-    calorieCount: number;
-    proteinCount: number;
-    carbohydrateCount: number;
-    lipidCount: number;
-  };
-};
-
 export default function UserHome() {
   const { userId } = useParams();
-  const [user, setUser] = useState<UserData | null>(null);
-  const [error, setError] = useState<boolean>(false);
+  const [user, setUser] = useState<UserInfo | null>(null);
+  const [error, setError] = useState<number | null>(null);
 
   useEffect(() => {
     if (userId) {
       getUserInfos(userId)
-        .then((userData) => {
+        .then((userData: UserInfo) => {
           setUser(userData);
         })
         .catch((error) => {
-          console.error(error);
-          setError(true);
+          setError(error);
         });
     }
   }, [userId]);
 
   const score = user?.score ? user.score : (user?.todayScore ? user?.todayScore : "");
 
-  if (error) {
+  if (error === 404) {
     return <NotFound />;
+  } else if (error === 500) {
+    return <></>;
   }
 
   return (

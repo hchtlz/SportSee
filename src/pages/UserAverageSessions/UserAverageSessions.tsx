@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getUserAverageSessions } from "../../service/api/data";
+import { getUserAverageSessions } from "../../service/index";
 import { useEffect, useState } from "react";
 import NotFound from "../404/404";
 
@@ -11,7 +11,6 @@ export default function UserAverageSessions() {
     getUserAverageSessions(userId || "")
       .then((data) => {
         setUserData(data);
-
       })
       .catch((error) => {
         console.error("Une erreur s'est produite : ", error);

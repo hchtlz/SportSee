@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserActivity } from "../../service/api/data";
+import { getUserActivity } from "../../service/index";
 import NotFound from "../404/404";
+import { UserActivityInfo } from "../../service/types";
 
 export default function UserActivity() {
   const { userId } = useParams<{ userId: string }>();
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<UserActivityInfo | null>(null);
 
   useEffect(() => {
     getUserActivity(userId || "")
-      .then((data) => {
-        setUserData(data);
-
+      .then((data: UserActivityInfo | { data: UserActivityInfo; } | undefined) => {
+        if (data && 'data' in data) {
+          setUserData(data.data);
+        } else {
+          setUserData(data as UserActivityInfo);
+        }
       })
       .catch((error) => {
         console.error("Une erreur s'est produite : ", error);

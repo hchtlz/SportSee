@@ -24,7 +24,7 @@ const NavContainer = styled.nav`
 
 const NavLink = styled(Link)`
   color: white;
-  font-size: 2.4rem;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
   text-decoration: none;
   transition: color 0.2s ease-in-out;
   z-index: 2;

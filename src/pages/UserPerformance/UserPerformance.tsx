@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getUserPerformance } from "../../service/api/data";
+import { getUserPerformance } from "../../service/index";
 import { useEffect, useState } from "react";
 import NotFound from "../404/404";
 

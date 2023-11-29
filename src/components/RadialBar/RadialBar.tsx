@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RadialBarChart, RadialBar } from 'recharts';
-import { getUserInfos } from '../../service/api/data';
+import { getUserInfos } from '../../service/index';
 import styled from 'styled-components';
 
 type RadialBarComponentProps = {
@@ -65,7 +65,6 @@ align-items: center;
 const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
   const [data, setData] = useState<{ uv: number; name?: string, fill?: string }[]>([{ uv: score, name: 'Score' }]);
   const { userId } = useParams<{ userId?: string }>();
-  console.log(data);
 
   useEffect(() => {
     if (userId) {
@@ -85,6 +84,7 @@ const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
           <RadialBar 
           fill="#ff0000"
           dataKey="uv"
+          cornerRadius={10}
         />
         </RadialBarChart>
         <InfoText>

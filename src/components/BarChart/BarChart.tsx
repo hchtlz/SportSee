@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, TooltipProps} from 'recharts';
 import { useParams } from 'react-router-dom';
-import { getUserActivity } from '../../service/api/data';
+import { getUserActivity } from '../../service/index';
+import { UserActivityInfo } from "../../service/types";
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -12,6 +13,10 @@ const Wrapper = styled.div`
   background: #FBFBFB;
   margin-bottom: 2em;
   width: 83.5rem;
+
+  @media (max-width: 1500px) {
+    width: 100%;
+  }
 `
 
 const Head = styled.div`
@@ -114,12 +119,11 @@ const CustomizedAxisTick = ({payload, x, y}: AxisTickProps) => {
 
 const UserBarChart = () => {
   const { userId = "" } = useParams<{ userId?: string }>();
-  const [userActivityData, setUserActivityData] = useState([]);
+  const [userActivityData, setUserActivityData] = useState<UserActivityInfo | null>(null);
 
   useEffect(() => {
-    /* Récupère les données d'activité de l'utilisateur */
     getUserActivity(userId)
-      .then((data) => {
+      .then((data : any) => {
         const sessions = data.data.sessions;
         setUserActivityData(sessions);
       })
@@ -144,7 +148,7 @@ const UserBarChart = () => {
         </Legend>
       </Head>
       <ResponsiveContainer height={200}>
-        <BarChart data={userActivityData} barGap={8} barCategoryGap={1}>
+        <BarChart data={userActivityData as any} barGap={8} barCategoryGap={1}>
           <CartesianGrid vertical={false} strokeDasharray="1 1" />
           <XAxis 
             dataKey="day" 

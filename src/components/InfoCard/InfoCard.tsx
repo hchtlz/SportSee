@@ -10,6 +10,9 @@ const CardContainer = styled.div`
   justify-content: center;
   padding-left: 3rem;
   width: 100%;
+
+  @media (max-width: 1500px) {
+    margin-bottom: 2rem;
 `;
 
 const Icon = styled.img`

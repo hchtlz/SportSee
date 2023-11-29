@@ -32,7 +32,7 @@ const NotFound = () => {
     <NotFoundContainer>
       <img src={error} alt="404" />
       <NotFoundHeading>Page non trouvée</NotFoundHeading>
-      <NotFoundText>Désolé, la page que vous cherchez n'existe pas.</NotFoundText>
+      <NotFoundText>Désolé, la page que vous cherchez n'a pas été trouvée.</NotFoundText>
     </NotFoundContainer>
   );
 };

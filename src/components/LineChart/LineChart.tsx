@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import { useParams } from 'react-router-dom';
-import { getUserAverageSessions } from '../../service/api/data';
+import { getUserAverageSessions } from '../../service/index';
 import styled from 'styled-components';
 
 const LineChartTitle = styled.h2`
@@ -50,8 +50,8 @@ const LineChartComponent = () => {
   useEffect(() => {
     if (userId) {
       getUserAverageSessions(userId)
-        .then((res) => setData(res.data.sessions))
-        .catch((error) => {
+        .then((res : any) => setData(res.data.sessions))
+        .catch((error : Error | any) => {
           console.error(error);
         });
     }

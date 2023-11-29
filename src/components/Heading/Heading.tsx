@@ -12,7 +12,7 @@ const HeadingContainer = styled.div`
 
 const BlackTitle = styled.h1`
   color: black;
-  font-size: 4.8rem;
+  font-size: clamp(3.2rem, 4.8vw, 4.8rem);
   margin-bottom: 0.4rem;
   margin-right: 0.5rem;
   text-align: left;
@@ -20,13 +20,13 @@ const BlackTitle = styled.h1`
 
 const RedName = styled.h1<HeadingProps>`
   color: red;
-  font-size: 4.8rem;
+  font-size: clamp(3.2rem, 4.8vw, 4.8rem);
   margin-bottom: 0.4rem;
   text-align: left;
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.8rem;
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
   text-align: left;
 `;
 

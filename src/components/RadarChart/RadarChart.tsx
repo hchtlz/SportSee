@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUserPerformance } from '../../service/api/data';
+import { getUserPerformance } from '../../service/index';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 import styled from 'styled-components';
 
