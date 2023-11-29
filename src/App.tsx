@@ -27,8 +27,3 @@ export default function App() {
     </div>
   )
 }
-
-/*  
-  TODO :
-      Changer la source des données (les données mockées et les données de l’API) en changeant uniquement le service utilisant l’API et la classe de modélisation. 
-*/
