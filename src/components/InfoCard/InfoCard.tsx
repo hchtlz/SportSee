@@ -9,10 +9,12 @@ const CardContainer = styled.div`
   height: 12.4rem;
   justify-content: center;
   padding-left: 3rem;
-  width: 100%;
+  width: clamp(18rem, 15.5vw, 25rem);
+  max-width: 25rem;
 
-  @media (max-width: 1500px) {
+  @media (max-width: 992px) {
     margin-bottom: 2rem;
+  }
 `;
 
 const Icon = styled.img`
@@ -30,6 +32,7 @@ const CardInformation = styled.div`
 
 const CardValue = styled.p`
   font-size: 2rem;
+  font-size: clamp(1.8rem, 1.2vw, 2rem);
   font-weight: 700;
   margin-bottom: 0.4rem;
   margin-top: 0;

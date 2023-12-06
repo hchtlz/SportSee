@@ -18,11 +18,15 @@ import { UserInfo } from "../../service/types";
 const Wrapper = styled.div`
   border-radius: 0.5rem;
   height: 100%;
-  margin-left: clamp(0.5rem, 12.5vw, 23.4rem);
+  margin-left: clamp(0.2rem, 5vw, 23.4rem);
   margin-top: 6.8rem;
   max-width: 113rem;
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1300px) {
+    margin-left: clamp(0.2rem, 2.5vw, 23.4rem);
+  }
+
+  @media (max-width: 992px) {
     margin-left: 0;
     width: 100%;
     padding: 0 2rem;
@@ -34,7 +38,7 @@ const ChartsWrapper = styled.div`
   display: flex;
   
   
-  @media (max-width: 1500px) {
+  @media (max-width: 992px) {
     flex-direction: column-reverse;
   }
 `;
@@ -49,12 +53,12 @@ const ChartsMainContainerBase = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  gap: 2rem;
 
-  @media (max-width: 1500px) {
+  @media (max-width: 992px) {
     flex-direction: column;
     width: 26.3rem;
     gap: 2rem;
-    margin: 0 auto;
   }
 `;
 
@@ -70,8 +74,12 @@ const ChartAsides = styled.div`
   margin-left: 2rem;
   width: 100%;
 
-  @media (max-width: 1500px) {
+  @media (max-width: 992px) {
     margin-left: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: left;
   }
 `;
 

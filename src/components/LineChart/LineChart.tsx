@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useParams } from 'react-router-dom';
 import { getUserAverageSessions } from '../../service/index';
 import styled from 'styled-components';
@@ -20,7 +20,13 @@ const LineChartTitle = styled.h2`
 const CustomLineChartContainer = styled.div`
   background-color: #ff0000;
   border-radius: 0.5rem;
+  height: 26.3rem;
+  max-width: 25.8rem;
   position: relative;
+  width: clamp(20rem, 17vw, 25.8rem);
+
+  @media (max-width: 992px) {
+    width: 100%;
 `;
 
 const CustomLineChart = styled(LineChart)`
@@ -79,28 +85,30 @@ const LineChartComponent = () => {
   return (
     <CustomLineChartContainer>
       <LineChartTitle>Durée moyenne des sessions</LineChartTitle>
-      <CustomLineChart width={258} height={263} data={data} >
-        <XAxis         
-          dataKey="day"
-          axisLine={false}
-          tickFormatter={(value) => daysOfWeek[value - 1]} 
-          tickLine={false}
-        />
-        <YAxis 
-          hide={true}
-          domain={[0, 100]}
-          tickCount={5}
-        />
-        <Tooltip content={<CustomTooltip active={false} />} cursor={{ stroke: 'black', strokeWidth: 80, strokeOpacity: 0.2 }} /> 
-        <Line
-          type="monotone"
-          dataKey="sessionLength"
-          stroke="rgba(255, 255, 255, 0.7)"
-          dot={false}
-          strokeWidth={3}
-          connectNulls
-        />
-      </CustomLineChart>
+      <ResponsiveContainer width="100%" height="100%">
+        <CustomLineChart width={258} height={263} data={data}>
+          <XAxis         
+            dataKey="day"
+            axisLine={false}
+            tickFormatter={(value) => daysOfWeek[value - 1]} 
+            tickLine={false}
+          />
+          <YAxis 
+            hide={true}
+            domain={[0, 100]}
+            tickCount={5}
+          />
+          <Tooltip content={<CustomTooltip active={false} />} cursor={{ stroke: 'black', strokeWidth: 80, strokeOpacity: 0.2 }} /> 
+          <Line
+            type="monotone"
+            dataKey="sessionLength"
+            stroke="rgba(255, 255, 255, 0.7)"
+            dot={false}
+            strokeWidth={3}
+            connectNulls
+          />
+        </CustomLineChart>
+      </ResponsiveContainer>
     </CustomLineChartContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { RadialBarChart, RadialBar } from 'recharts';
+import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
 import { getUserInfos } from '../../service/index';
 import styled from 'styled-components';
 
@@ -9,16 +9,22 @@ type RadialBarComponentProps = {
 };
 
 const Wrapper = styled.div`
-position: relative;
+  position: relative;
+  background-color: #FBFBFB;
 `;
 
 const RadialBarContainer = styled.div`
   align-items: center;
-  background-color: #FBFBFB;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 25.8rem;
+  width: clamp(20rem, 17vw, 25.8rem);
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 const ScoreTitle = styled.h3`
@@ -57,7 +63,7 @@ align-items: center;
   left: 50%;
   overflow: hidden;
   position: absolute;
-  transform: translateX(-50%);
+  transform: translate(-50%, 100%);
   width: 13.7rem;
   z-index: 0;
 `;
@@ -80,19 +86,22 @@ const RadialBarComponent = ({ score }: RadialBarComponentProps) => {
     <Wrapper>
       <RadialBarContainer>
         <ScoreTitle>Score</ScoreTitle>
-        <RadialBarChart width={258} height={263} cx="50%" cy="50%" innerRadius="60%" barSize={30} data={data} startAngle={90} endAngle={450}>
-          <RadialBar 
-          fill="#ff0000"
-          dataKey="uv"
-          cornerRadius={10}
-        />
-        </RadialBarChart>
+        <ResponsiveContainer width="100%" height="100%">
+          <RadialBarChart width={258} height={263} cx="50%" cy="50%" innerRadius="60%" barSize={30} data={data} startAngle={90} endAngle={450}>
+            <RadialBar 
+              fill="#ff0000"
+              dataKey="uv"
+              cornerRadius={10}
+            />
+          </RadialBarChart>
+        </ResponsiveContainer>
         <InfoText>
           <ScorePercentage>{(score * 100).toFixed(0)}%</ScorePercentage>
           <GoalDescription>de votre objectif</GoalDescription>
         </InfoText>
       </RadialBarContainer>
     </Wrapper>
+
   );
 };
 
