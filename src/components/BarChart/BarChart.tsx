@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 	padding: 2.5rem;
   background: #FBFBFB;
   margin-bottom: 2em;
-  width: clamp(56rem, 54vw, 83.5rem);
+  width: clamp(56rem, 57.5vw, 83.5rem);
 `
 
 const Head = styled.div`
